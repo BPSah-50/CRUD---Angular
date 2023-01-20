@@ -419,37 +419,64 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <div class="container mt-5">
   <h2>{{ empDetails | uppercase }}</h2>
-  <table class="table">
-    <thead class="table-dark">
+  <table class="table shadow-lg p-3 mb-5 bg-white rounded">
+    <thead class="table-primary">
       <tr>
         <th scope="col">S.No.</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
         <th scope="col">Mobile No</th>
-        <th scope="col">Edit/Delete</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       <!-- let i = index" -->
       <tr *ngFor="let data of datas">
         <th scope="row">{{ data.id }}</th>
-        <td>{{ data.name }}</td>
-        <td>{{ data.email }}</td>
-        <td>+91-{{ data.mo_no }}</td>
         <td>
-          <!-- <button type="button" class="btn btn-primary" (click)="editCar(data)">
-            EDIT
-          </button> -->
-          <i style="font-size: 24px" class="fas" (click)="editCar(data)"
-            >&#xf044;</i
-          >&nbsp;&nbsp;
-          <i
-            style="font-size: 24px"
-            class="fas"
-            id="delete"
-            (click)="deleteItem(data)"
-            >&#xf2ed;</i
-          >
+          <div *ngIf="data.isEdit">
+            <input type="text" [(ngModel)]="data.name" class="form-control" />
+          </div>
+          <div *ngIf="!data.isEdit">
+            {{ data.name }}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="data.isEdit">
+            <input type="text" [(ngModel)]="data.email" class="form-control" />
+          </div>
+          <div *ngIf="!data.isEdit">
+            {{ data.email }}
+          </div>
+        </td>
+        <td>
+          <div *ngIf="data.isEdit">
+            <input type="text" [(ngModel)]="data.mo_no" class="form-control" />
+          </div>
+          <div *ngIf="!data.isEdit">+91-{{ data.mo_no }}</div>
+        </td>
+        <td>
+          <div *ngIf="data.isEdit">
+            <i style="font-size: 24px" class="fa">&#xf0c7;</i>&nbsp;&nbsp;
+            <i
+              style="font-size: 24px"
+              class="fa delete"
+              (click)="data.isEdit = false"
+              >&#xf00d;</i
+            >
+          </div>
+          <div *ngIf="!data.isEdit">
+            <i style="font-size: 24px" class="fas" (click)="editDetails(data)"
+              >&#xf044;</i
+            >&nbsp;&nbsp;
+            <i
+              style="font-size: 24px"
+              class="fas"
+              id="delete"
+              (click)="deleteItem(data)"
+              >&#xf2ed;</i
+            >
+          </div>
         </td>
       </tr>
     </tbody>
@@ -473,7 +500,7 @@
       <div>
         <label>Mobile No.</label>
         <div>
-          <input type="number" id="mo_no" formControlName="mo_no" />
+          <input type="tel" id="mo_no" formControlName="mo_no" />
         </div>
       </div>
       <div>

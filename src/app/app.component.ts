@@ -4,6 +4,7 @@ import { EMPLOYEES } from './datas';
 import Swal from 'sweetalert2';
 
 interface Empl {
+  isEdit: boolean;
   id: number;
   name: string;
   email: string;
@@ -25,14 +26,21 @@ export class AppComponent implements OnInit {
 
   datas: Empl[] = EMPLOYEES;
   emp: FormGroup | undefined;
+  // data: any;
 
-  editCar(emp: Empl) {
-    this.emp = new FormGroup({
-      id: new FormControl(emp.id),
-      name: new FormControl(emp.name),
-      email: new FormControl(emp.email),
-      mo_no: new FormControl(emp.mo_no),
+  // editDetails(emp: Empl) {
+  //   this.emp = new FormGroup({
+  //     id: new FormControl(emp.id),
+  //     name: new FormControl(emp.name),
+  //     email: new FormControl(emp.email),
+  //     mo_no: new FormControl(emp.mo_no),
+  //   });
+  // }
+  editDetails(data: Empl) {
+    this.datas.forEach((element) => {
+      element.isEdit = false;
     });
+    data.isEdit = true;
   }
 
   save() {
