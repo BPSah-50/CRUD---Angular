@@ -1,0 +1,30 @@
+.container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+}
+
+thead {
+    background-color: #c2e6e7;
+}
+
+i {
+    color: blue;
+    cursor: pointer;
+}
+
+#delete {
+    color: red;
+}
